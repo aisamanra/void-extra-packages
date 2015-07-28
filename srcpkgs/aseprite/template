@@ -1,0 +1,23 @@
+# Template file for 'aseprite'
+pkgname=aseprite
+version=1.0.9
+revision=1
+build_style=cmake
+hostmakedepends=""
+makedepends="allegro4-devel pixman-devel curl giflib-devel zlib-devel libpng-devel tinyxml-devel gtest-devel git cmake libX11-devel perl"
+depends=""
+short_desc="A pixel art and animation tool."
+maintainer="Getty Ritter <gdritter@galois.com>"
+license="GPL-3"
+homepage="http://www.aseprite.org/"
+distfiles=""
+checksum=""
+
+function do_fetch {
+  git clone "https://github.com/aseprite/aseprite.git" "${pkgname}-${version}"
+  ( cd "${pkgname}-${version}"
+    git checkout "tags/v${version}"
+    git submodule init
+    git submodule update
+  )
+}
