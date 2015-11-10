@@ -1,0 +1,38 @@
+# Template file for 'sbt'
+pkgname=sbt
+version=0.13.9
+revision=1
+#wrksrc=
+create_wrksrc=yes
+#configure_args=""
+#make_build_args=""
+#make_install_args=""
+#conf_files=""
+#make_dirs="/var/log/dir 0755 root root"
+hostmakedepends=""
+makedepends=""
+depends=""
+short_desc="A minimal build tool for Scala projects"
+maintainer="Getty Ritter <gdritter@galois.com>"
+license="BSD"
+homepage="http://www.scala-sbt.org/"
+distfiles="https://dl.bintray.com/${pkgname}/native-packages/${pkgname}/${version}/${pkgname}-${version}.tgz"
+checksum=148f2801f2993773de6f8859fe0e6520fcabe649d66bb316e13aff8b2fd7f504
+
+do_build() {
+	return 0
+}
+
+do_install() {
+	install -d ${DESTDIR}/usr/share
+	cp -r ${wrksrc}/sbt ${DESTDIR}/usr/share
+	rm ${DESTDIR}/usr/share/${pkgname}/bin/sbt.bat
+	rm ${DESTDIR}/usr/share/${pkgname}/conf/sbtconfig.txt
+	find ${DESTDIR}/usr/share/${pkgname} -type f ! -name sbt -exec chmod -x {} \;
+
+	install -d ${DESTDIR}/usr/bin
+	ln -s /usr/share/${pkgname}/bin/sbt ${DESTDIR}/usr/bin/sbt
+
+	install -d ${DESTDIR}/etc/${pkgname}
+	ln -s /usr/share/${pkgname}/conf/sbtopts ${DESTDIR}/etc/${pkgname}/sbtopts
+}
