@@ -1,0 +1,39 @@
+# Template file for 'scala'
+pkgname=scala
+version=2.11.7
+revision=1
+hostmakedepends="apache-ant curl"
+makedepends="openjdk git"
+depends="virtual?java-runtime"
+short_desc="Hybrid object-oriented and functional language for the JVM"
+maintainer="Getty Ritter <gdritter@galois.com>"
+license="GPL-3"
+homepage="http://www.scala-lang.org/"
+distfiles="https://github.com/scala/scala/archive/v2.11.7.tar.gz>${pkgname}-${version}.tar.gz"
+checksum="1679ee604bc4e881b0d325e164c39c02dcfa711d53cd3115f5a6c9676c5915ef"
+
+do_build() {
+	. /etc/profile.d/apache-ant.sh
+	. /etc/profile.d/10_openjdk.sh
+
+	ls ${pwd}
+
+	export ANT_OPTS="-Xms2500M -Xmx2500M -Xss8M -XX:MaxPermSize=1024M -XX:+UseParallelGC"
+	export M2_OPTS="-Dmaven.repo.local=/tmp"
+
+	ant build-opt pack.doc osgi.done -Dbuild.release=true -Duser.home=/tmp
+}
+
+do_install() {
+	install -d ${DESTDIR}/usr/{bin,share}
+	install -d ${DESTDIR}/usr/share/man/man1
+	install -d ${DESTDIR}/usr/share/scala/{bin,lib}
+	cp -r ${wrksrc}/build/pack/lib ${DESTDIR}/usr/share/scala/
+	cp -r ${wrksrc}/build/pack/man ${DESTDIR}/usr/share/
+	install -m 755 ${wrksrc}/build/pack/bin/{fsc,scala,scalac,scalap,scaladoc} ${DESTDIR}/usr/share/scala/bin
+
+	for tgt in fsc scala scalac scalap scaladoc
+	do
+		ln -s ../share/scala/bin/${tgt} ${DESTDIR}/usr/bin/${tgt}
+	done
+}
