@@ -1,0 +1,20 @@
+pkgname=json2bencode
+version=0.0.1
+revision=1
+build_style=haskell-stack
+nocross=yes
+nopie=yes
+create_wrksrc=yes
+hostmakedepends="ghc stack git"
+short_desc="Small utility for converting JSON to Bencode"
+maintainer="Getty Ritter <gettyritter@gmail.com>"
+license="BSD-3"
+homepage="http://github.com/aisamanra/GRUtils"
+
+do_fetch() {
+	mkdir -p ${wrksrc}
+	TMPDIR="$(mktemp -d)"
+	git clone https://github.com/aisamanra/whatchamacallit.git ${TMPDIR}
+	cp -r ${TMPDIR}/json2bencode/* ${wrksrc}/.
+	rm -rf ${TMPDIR}
+}
