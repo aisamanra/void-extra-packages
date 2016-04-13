@@ -1,0 +1,22 @@
+# Template file for 'io-language'
+pkgname=io-language
+version=2015.11.11
+revision=1
+wrksrc=io-${version}
+#create_wrksrc=yes
+#only_for_archs="i686 x86_64"
+build_style=cmake
+#configure_args=""
+#make_build_args=""
+#make_install_args=""
+#conf_files=""
+#make_dirs="/var/log/dir 0755 root root"
+hostmakedepends=""
+makedepends="cmake"
+depends=""
+short_desc="small oo lang"
+maintainer="Getty Ritter <gdritter@galois.com>"
+license="GPL-3"
+homepage="http://iolanguage.org/"
+distfiles="https://github.com/stevedekorte/io/archive/2015.11.11.tar.gz"
+checksum=00d7be0b69ad04891dd5f6c77604049229b08164d0c3f5877bfab130475403d3
