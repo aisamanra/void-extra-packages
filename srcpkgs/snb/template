@@ -1,0 +1,22 @@
+# Template file for 'snb'
+pkgname=snb
+version=0.0.1
+revision=1
+build_style=gnu-makefile
+hostmakedepends="git"
+makedepends="ncurses-devel"
+depends=""
+short_desc="A simple hierarchical notebook"
+maintainer="Getty Ritter <gdritter@galois.com>"
+license="GPL-3"
+homepage="https://github.com/drbig/snb"
+
+do_fetch() {
+	git clone https://github.com/drbig/snb.git ${wrksrc}
+}
+
+do_install() {
+	vbin bin/snb
+	vman snb.1
+	vdoc help.md
+}
