@@ -1,6 +1,6 @@
 # Template file for 'electric-boogaloo'
 pkgname=electric-boogaloo
-version=0.1.1
+version=0.1.2
 revision=1
 hostmakedepends="ghc cabal-install git"
 makedepends=""
@@ -10,7 +10,8 @@ maintainer="Getty Ritter <gdritter@galois.com>"
 license="GPL-3"
 homepage="https://github.com/aisamanra/electric-boogaloo"
 distfiles="https://github.com/aisamanra/${pkgname}/archive/v${version}.tar.gz"
-checksum="c8cb27fc9d33124ce3e135e225be194b3710e051306f3e7c5037567173b44517"
+checksum="484b1f7fc6d5833509e81772f1de10ed18f6181ad587527fcb7db9465f04a24f"
+nopie="yes"
 
 do_build() {
 	cabal sandbox init
