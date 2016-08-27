@@ -1,0 +1,35 @@
+# Template file for 'matterhorn'
+pkgname=matterhorn
+version=0.0.1
+revision=20160826
+hostmakedepends="ghc cabal-install git"
+makedepends="ncurses-devel zlib-devel"
+depends=""
+short_desc="A small terminal-based MatterMost client"
+maintainer="Getty Ritter <gdritter@galois.com>"
+license="BSD"
+homepage="https://github.com/aisamanra/matterhorn"
+nopie="yes"
+
+do_fetch() {
+	mkdir -p ${wrksrc}
+	git clone https://github.com/dagit/mattermost-api.git ${wrksrc}/mattermost-api
+	git clone https://github.com/aisamanra/matterhorn.git ${wrksrc}/matterhorn
+}
+
+do_build() {
+	cd ${wrksrc}/matterhorn
+	cabal sandbox init
+	cabal update
+	cabal sandbox add-source ${wrksrc}/mattermost-api
+	cabal install happy
+	cabal install alex
+	cabal install ${makejobs} --only-dependencies
+	cabal configure -v --prefix=/usr
+	cabal build ${makejobs}
+}
+
+do_install() {
+	vbin ${wrksrc}/matterhorn/dist/build/matterhorn/matterhorn
+	vlicense ${wrksrc}/matterhorn/LICENSE
+}
