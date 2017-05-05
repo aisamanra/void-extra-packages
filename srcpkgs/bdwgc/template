@@ -1,0 +1,28 @@
+# Template file for 'bdwgc'
+pkgname=bdwgc
+version=7.6.0
+revision=4
+wrksrc=gc-7.6.0
+build_style=gnu-configure
+hostmakedepends=""
+configure_args="--with-libatomic-ops --enable-cplusplus"
+hostmakedepends="pkg-config"
+makedepends="libatomic-devel libatomic_ops-devel"
+depends="libatomic_ops"
+short_desc="The Boehm GC library"
+maintainer="Getty Ritter <gdritter@galois.com>"
+license="GPL-3"
+homepage="http://www.hboehm.info/gc/"
+distfiles="http://www.hboehm.info/gc/gc_source/gc-${version}.tar.gz"
+checksum=a14a28b1129be90e55cd6f71127ffc5594e1091d5d54131528c24cd0c03b7d90
+
+bdwgc-devel_package() {
+	short_desc+=" - development files"
+	depends="${sourcepkg}>=${version}_${revision}"
+	pkg_install() {
+		vmove usr/include
+		vmove usr/lib/pkgconfig
+		vmove "usr/lib/*.a"
+		vmove "usr/lib/*.so"
+	}
+}

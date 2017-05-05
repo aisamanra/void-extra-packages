@@ -1,0 +1,22 @@
+# Template file for 'xs'
+pkgname=xs
+version=20170505
+revision=1
+build_style=gnu-configure
+hostmakedepends="git automake autoconf bison"
+makedepends="bdwgc-devel libffi-devel boost-devel"
+depends=""
+short_desc="A cleanly-designed shell based on Plan 9's es shell"
+maintainer="Getty Ritter <gdritter@galois.com>"
+license="GPL-3"
+homepage="https://github.com/TieDyedDevil/XS"
+distfiles=""
+checksum=
+
+do_fetch() {
+    git clone -b cleanup-1 https://github.com/TieDyedDevil/XS.git ${wrksrc}
+}
+
+pre_configure() {
+    autoreconf -i
+}
