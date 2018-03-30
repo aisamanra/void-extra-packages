@@ -3,8 +3,7 @@ pkgname=charter
 version="$(date +%F | sed 's/-//g')"
 revision=2
 hostmakedepends="ghc cabal-install git"
-makedepends=""
-depends=""
+build_style="haskell-cabal"
 short_desc="Project template initializer for Haskell"
 maintainer="Getty Ritter <charter-pkg@infinitenegativeutility.com>"
 license="BSD"
@@ -13,17 +12,4 @@ nopie="yes"
 
 do_fetch() {
     git clone https://github.com/aisamanra/charter.git ${wrksrc}
-}
-
-do_build() {
-	cabal sandbox init
-	cabal update
-	cabal install ${makejobs} --only-dependencies
-	cabal configure -v --prefix=/usr
-	cabal build ${makejobs}
-}
-
-do_install() {
-	vbin dist/build/${pkgname}/${pkgname}
-	vlicense LICENSE
 }
