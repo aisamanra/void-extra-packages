@@ -1,6 +1,6 @@
 # Template file for 'sbt'
 pkgname=sbt
-version=0.13.9
+version=0.13.11
 revision=1
 #wrksrc=
 create_wrksrc=yes
@@ -13,10 +13,10 @@ hostmakedepends=""
 makedepends=""
 depends=""
 short_desc="A minimal build tool for Scala projects"
-maintainer="Getty Ritter <gdritter@galois.com>"
+maintainer="Getty Ritter <sbt-pkg@infinitenegativeutility.com>"
 license="BSD"
 homepage="http://www.scala-sbt.org/"
-distfiles="https://dl.bintray.com/${pkgname}/native-packages/${pkgname}/${version}/${pkgname}-${version}.tgz"
+distfiles="https://dl.bintray.com/sbt/native-packages/${pkgname}/${version}/${pkgname}-${version}.tgz"
 checksum=148f2801f2993773de6f8859fe0e6520fcabe649d66bb316e13aff8b2fd7f504
 
 do_build() {

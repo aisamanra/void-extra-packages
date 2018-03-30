@@ -1,13 +1,13 @@
 # Template file for 'aseprite'
 pkgname=aseprite
-version=1.0.9
+version=1.1.13
 revision=1
 build_style=cmake
 hostmakedepends=""
 makedepends="allegro4-devel pixman-devel curl giflib-devel zlib-devel libpng-devel tinyxml-devel gtest-devel git cmake libX11-devel perl"
 depends=""
 short_desc="A pixel art and animation tool."
-maintainer="Getty Ritter <gdritter@galois.com>"
+maintainer="Getty Ritter <aseprite-pkg@infinitenegativeutility.com>"
 license="GPL-3"
 homepage="http://www.aseprite.org/"
 distfiles=""

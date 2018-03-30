@@ -1,16 +1,16 @@
 # Template file for 'scala'
 pkgname=scala
-version=2.11.7
+version=2.11.8
 revision=1
 hostmakedepends="apache-ant curl"
 makedepends="openjdk git"
 depends="virtual?java-runtime"
 short_desc="Hybrid object-oriented and functional language for the JVM"
-maintainer="Getty Ritter <gdritter@galois.com>"
+maintainer="Getty Ritter <scala-pkg@infinitenegativeutility.com>"
 license="GPL-3"
 homepage="http://www.scala-lang.org/"
-distfiles="https://github.com/scala/scala/archive/v2.11.7.tar.gz>${pkgname}-${version}.tar.gz"
-checksum="1679ee604bc4e881b0d325e164c39c02dcfa711d53cd3115f5a6c9676c5915ef"
+distfiles="https://github.com/${pkgname}/${pkgname}/archive/v${version}.tar.gz>${pkgname}-${version}.tar.gz"
+checksum="4f11273b4b3c771019253b2c09102245d063a7abeb65c7b1c4519bd57605edcf"
 
 do_build() {
 	. /etc/profile.d/apache-ant.sh

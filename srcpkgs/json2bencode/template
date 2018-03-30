@@ -7,7 +7,7 @@ nopie=yes
 create_wrksrc=yes
 hostmakedepends="ghc stack git"
 short_desc="Small utility for converting JSON to Bencode"
-maintainer="Getty Ritter <gettyritter@gmail.com>"
+maintainer="Getty Ritter <json2bencode-pkg@infinitenegativeutility.com>"
 license="BSD-3"
 homepage="http://github.com/aisamanra/GRUtils"
 
