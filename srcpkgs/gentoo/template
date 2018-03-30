@@ -1,0 +1,13 @@
+# Template file for 'gentoo'
+pkgname=gentoo
+version=0.20.7
+revision=2
+build_style=gnu-configure
+hostmakedepends="pkg-config"
+makedepends="gtk+3-devel"
+short_desc="Graphical file manager for Unix-like systems"
+maintainer="Getty Ritter <gentoo-pkg@infinitenegativeutility.com>"
+license="GPL-2"
+homepage="https://sourceforge.net/projects/gentoo/"
+distfiles="https://downloads.sourceforge.net/${pkgname}/${version}/${pkgname}-${version}.tar.gz"
+checksum=9a50a139509a2f7e4540c8a093105bd8dd432596c9903db24891fbacf28ab1aa

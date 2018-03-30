@@ -1,0 +1,25 @@
+# Template file for 'ntl'
+pkgname=ntl
+version=10.3.0
+revision=1
+build_wrksrc="src"
+build_style=configure
+hostmakedepends="perl"
+configure_args="DEF_PREFIX=/usr"
+makedepends="gmp-devel"
+depends=""
+short_desc="A high-performance library for number theory"
+maintainer="Getty Ritter <ntl-pkg@infinitenegativeutility.com>"
+license="LGPL-2"
+homepage="http://www.shoup.net/ntl/"
+distfiles="http://www.shoup.net/ntl/${pkgname}-${version}.tar.gz"
+checksum=717b8d519d66f383a6ae938e255ee4dd103dbab77e4e828dc9cbb0749ec4c1f4
+
+ntl-devel_package() {
+	 short_det+=" - development files"
+	depends="${sourcepkg}>=${version}_${revision}"
+	pkg_install() {
+		vmove usr/include
+		vmove usr/lib/*.a
+	}
+}

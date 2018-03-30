@@ -1,0 +1,12 @@
+# Template file for 'base-gdritter'
+pkgname=base-gdritter
+version=20160606
+revision=1
+build_style=meta
+noarch=yes
+depends="firefox emacs vim tmux mplayer mpd ncmpc mutt
+         inkscape gimp audacity"
+short_desc="Basic packages in use for a new system"
+maintainer="Getty Ritter <base-gdritter-pkg@infinitenegativeutility.com>"
+license="BSD"
+homepage="http://gdritter.com/"

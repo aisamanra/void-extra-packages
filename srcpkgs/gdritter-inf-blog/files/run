@@ -1,0 +1,5 @@
+#!/bin/bash -e
+
+exec 2>&1
+cd /opt/inf/blog && \
+  exec chpst -u http:http /usr/bin/inf-blog

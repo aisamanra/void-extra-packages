@@ -1,0 +1,38 @@
+# Template file for 'NetBeans'
+pkgname=netbeans
+version=8.2
+_subver=201609300101
+revision=1
+# wrksrc="netbeans"
+create_wrksrc=yes
+hostmakedepends="unzip openjdk apache-ant"
+makedepends=""
+depends="virtual?java-environment"
+short_desc="Java IDE"
+maintainer="Getty Ritter <netbeans-pkg@infinitenegativeutility.com>"
+license="GPL-3"
+homepage="https://netbeans.org/"
+distfiles="http://download.netbeans.org/netbeans/${version}/final/zip/netbeans-${version}-${_subver}-src.zip"
+checksum=5a7141176fe655807f04bdde12073116a77c1844e4ca7a071d95930b7cd7d5ac
+nopie=yes
+
+do_install() {
+    ANT_OPTS="-Xmx1G" ant build
+    return 77
+}
+
+# do_install() {
+#     vbin ./bin/${pkgname}
+#     vmkdir /usr/share/${pkgname}
+#     vcopy . /usr/share/${pkgname}
+#     rm -rf ${DESTDIR}/usr/share/bin
+#     for dir in $(find ${DESTDIR} -iname '*linux-arm*'); do
+#         rm -rf "${dir}"
+#     done
+#     for dir in $(find ${DESTDIR} -name '*risc*'); do
+#         rm -rf "${dir}"
+#     done
+#     for dir in $(find ${DESTDIR} -name '*sparc*'); do
+#         rm -rf "${dir}"
+#     done
+# }

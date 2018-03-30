@@ -1,0 +1,63 @@
+# Template file for 'mattermost'
+pkgname=mattermost
+version=4.7.1
+revision=1
+create_wrksrc=yes
+build_style=gnu-makefile
+hostmakedepends="yarn go git docker zip python nodejs"
+makedepends="libpng12-devel"
+depends=""
+short_desc="Open-source, self-hosted team chat"
+maintainer="Getty Ritter <mattermost-pkg@infinitenegativeutility.com>"
+license="MIT"
+homepage="https://about.mattermost.com/"
+distfiles="
+  https://github.com/mattermost/mattermost-server/archive/v${version}.tar.gz>server.tar.gz
+  https://github.com/mattermost/mattermost-webapp/archive/v${version}.tar.gz>webapp.tar.gz"
+checksum="
+  b938f2520147dcefca6effecfb99b4bcd7e0f5133cec913d0e937adc0fdf4c78
+  acaa5c7a079f5c62a0f32c76ff82be1506e2c8490c7e33453d4d652d0f45f418"
+nopie=true
+
+system_accounts="mattermost"
+mattermost_homedir="/opt/mattermost"
+mattermost_shell="/bin/sh"
+mattermost_descr="Mattermost user"
+GOOS=linux
+GOARCH=amd64
+
+do_configure() {
+    mkdir -p ${wrksrc}/src/github.com/mattermost
+    cd ${wrksrc}/src/github.com/mattermost
+    mv ${wrksrc}/mattermost-server-${version} ${pkgname}-server
+    mv ${wrksrc}/mattermost-webapp-${version} ${pkgname}-webapp
+    cd ${pkgname}-server
+    sed -r -i Makefile -e 's/^clean: stop-docker/clean:/'
+    sed -r -i build/release.mk \
+        -e 's/\$\(DIST_PATH\)\/config\/config.json/\$\(DIST_PATH\)\/config\/default.json/'
+
+    # Remove platform specific lines from the Makefile from the line beginning
+    # with that statement to the end of file (we do not care of the additional
+    # file copy, nor the tar compression defined below the file).
+    sed  -i build/release.mk \
+         -e '/# ----- PLATFORM SPECIFIC -----/,//d'
+
+    make clean || true
+
+}
+
+do_build() {
+    export GOOS=linux
+    export GOARCH=amd64
+    cd "${wrksrc}/src/github.com/mattermost/${pkgname}-server"
+    GOPATH=${wrksrc} make ${makejobs} ${make_build_args} build-linux
+    GOPATH=${wrksrc} make ${makejobs} ${make_build_args} build-client
+    GOPATH=${wrksrc} make ${makejobs} ${make_build_args} package
+}
+
+do_install() {
+    cd "${wrksrc}/src/github.com/mattermost/${pkgname}-server"
+    mkdir -p ${DESTDIR}/opt/
+    cp -a dist/mattermost ${DESTDIR}/opt/mattermost
+    vinstall "${wrksrc}/bin/platform" 755 /opt/mattermost/bin/
+}

@@ -1,0 +1,28 @@
+# Template file for 'birdfont'
+pkgname=birdfont
+version=2.19.0
+revision=1
+hostmakedepends="vala python3 doit pkg-config python3-setuptools"
+makedepends="libgee-devel libglib-devel gtk+3-devel webkit2gtk-devel libnotify-devel sqlite-devel cairo-devel xmlbird"
+depends=""
+short_desc="An editor for TTF, EOT, SVG, and BF fonts"
+maintainer="Getty Ritter <birdfont-pkg@infinitenegativeutility.com>"
+license="GPL-3"
+homepage="http://birdfont.org/"
+distfiles="https://github.com/jeohanmattssonm/${pkgname}/archive/v${version}.tar.gz"
+checksum=6f8004ce3f7ef25b3ea5af46726e611b500670ea0be5f57953503a9adaa23530
+nopie=yes
+
+do_configure() {
+    ./configure --prefix=${PREFIX}
+}
+
+do_build() {
+    doit
+}
+
+do_install() {
+    ./install.py --dest=${DESTDIR}
+    mv ${DESTDIR}/usr/man ${DESTDIR}/usr/share/man
+    mv ${DESTDIR}/usr/lib64 ${DESTDIR}/usr/lib
+}

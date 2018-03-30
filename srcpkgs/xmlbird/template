@@ -1,0 +1,26 @@
+# Template file for 'xmlbird'
+pkgname=xmlbird
+version=1.2.4
+revision=1
+hostmakedepends="vala python3 doit python3-setuptools pkg-config"
+makedepends="libglib-devel"
+depends=""
+short_desc="A Vala and C library for XML parsing"
+maintainer="Getty Ritter <xmlbird-pkg@infinitenegativeutility.com>"
+license="GPL-3"
+homepage="http://birdfont.org/xmlbird.php"
+distfiles="https://github.com/johanmattssonm/${pkgname}/archive/v${version}.tar.gz"
+checksum=4aa0fad4639b25e8acce2a92c7ddb85438ffe2070e5434a838d34f28fff43456
+
+do_configure() {
+    ./configure --prefix=${PREFIX}
+}
+
+do_build() {
+    doit
+}
+
+do_install() {
+    ./install.py --dest=${DESTDIR}
+    mv ${DESTDIR}/usr/lib64 ${DESTDIR}/usr/lib
+}

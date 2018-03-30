@@ -1,0 +1,31 @@
+# Template file for 'gdr-inf-dict'
+pkgname=gdr-inf-dict
+version=1.0.4
+revision=1
+create_wrksrc=yes
+hostmakedepends="ghc cabal-install"
+makedepends="zlib-devel"
+depends=""
+short_desc="Infinite negative utility dynamic dictionary site"
+maintainer="Getty Ritter <gdr-inf-dict-pkg@infinitenegativeutility.com>"
+license="BSD"
+homepage="http://dict.infinitenegativeutility.com/"
+distfiles="http://src.gdritter.com/inf-dict-${version}.tar.gz"
+checksum=c7c69299336f4951ba2d44f40b358a8f9c0c9750847f7c41fcb7b0d59eae2af2
+nopie=yes
+
+do_build() {
+    cabal sandbox init
+    cabal update
+    cabal install ${makejobs} --only-dependencies
+    cabal configure -v --prefix=/usr --libsubdir='$pkg' \
+          --datasubdir='$pkg' --docdir='$datadir/doc/$pkg'
+    cabal build ${makejobs}
+}
+
+do_install() {
+    vbin dist/build/inf-dict/inf-dict
+    vlicense LICENSE
+    mkdir -p ${DESTDIR}/opt/inf/dict/static/
+    cp static/* ${DESTDIR}/opt/inf/dict/static/.
+}

@@ -1,0 +1,18 @@
+# Template file for 'matrix-synapse'
+pkgname=matrix-synapse
+version=0.14.0
+revision=2
+noarch=yes
+build_style=python-module
+hostmakedepends="python-setuptools asciidoc"
+depends="python Twisted "
+short_desc="Matrix protocol reference homeserver"
+maintainer="Getty Ritter <matrix-synapse-pkg@infinitenegativeutility.com>"
+homepage="https://matrix.org/blog/project/synapse/"
+license="Apache"
+distfiles="https://github.com/matrix-org/synapse/archive/v${version}.tar.gz"
+checksum=c5bed7242c9da0e5833da0a45454a2168062a3b204b6a779de7a6c228312d947
+
+post_extract() {
+	mv /builddir/synapse-${version} /builddir/${pkgname}-${version}
+}

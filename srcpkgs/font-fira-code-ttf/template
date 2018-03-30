@@ -1,0 +1,23 @@
+# Template file for 'font-fira-code-otf'
+pkgname=font-fira-code-ttf
+version=1.200
+revision=1
+create_wrksrc=yes
+hostmakedepends=""
+makedepends=""
+depends="font-util xbps-triggers"
+font_dirs="/usr/share/fonts/TTF"
+short_desc="Monospace font with programming ligatures"
+maintainer="Getty Ritter <font-fira-code-ttf-pkg@infinitenegativeutility.com>"
+license="SIL"
+homepage="https://github.com/tonsky/FiraCode"
+distfiles="https://github.com/tonsky/FiraCode/archive/${version}.tar.gz"
+checksum=4b7a4da9cdcbde4bb7b7f2df9e6d278d86d933be603867ae1ca844a43138c0b1
+
+do_install() {
+	vmkdir usr/share/fonts/TTF
+
+	for files in FiraCode-${version}/distr/ttf/*; do
+		vinstall ${files} 644 /usr/share/fonts/TTF
+	done
+}

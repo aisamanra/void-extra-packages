@@ -1,0 +1,14 @@
+# Template file for 'csmith'
+pkgname=csmith
+version=2.2.0
+revision=1
+build_style=gnu-configure
+hostmakedepends="m4"
+makedepends=""
+depends=""
+short_desc="A fuzzing tool for random C99 programs"
+maintainer="Getty Ritter <csmith-pkg@infinitenegativeutility.com>"
+license="BSD"
+homepage="https://embed.cs.utah.edu/csmith/"
+distfiles="https://embed.cs.utah.edu/csmith/csmith-${version}.tar.gz"
+checksum=62fd96d3a5228241d4f3159511ad3ff5b8c4cedb9e9a82adc935830b421c8e37

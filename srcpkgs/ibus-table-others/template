@@ -1,0 +1,18 @@
+# Template file for 'ibus-table-others'
+pkgname=ibus-table-others
+version=1.3.5
+revision=1
+build_style=gnu-makefile
+hostmakedepends="python3 automake pkg-config"
+makedepends="ibus-table"
+depends="ibus"
+short_desc="IM Engine framework for table-based input methods"
+maintainer="Getty Ritter <ibus-table-others-pkg@infinitenegativeutility.com>"
+license="GPL-3"
+homepage="https://github.com/kaio/ibus-table"
+distfiles="https://github.com/moebiuscurve/${pkgname}/archive/${version}.tar.gz"
+checksum=528caf645abcecf5a7622c39666935871363e698976059d89d560b8fe7325a0e
+
+do_configure() {
+    ./autogen.sh --prefix=/usr --libexecdir=/usr/libexec
+}

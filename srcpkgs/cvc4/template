@@ -1,0 +1,25 @@
+# Template file for 'cvc4'
+pkgname=cvc4
+version=1.4
+revision=1
+build_style=gnu-configure
+hostmakedepends="wget"
+makedepends="gmp-devel gmpxx-devel boost-devel"
+depends=""
+short_desc="CVC4 is an efficient, open-source SMT solver."
+maintainer="Getty Ritter <cvc4-pkg@infinitenegativeutility.com>"
+license="GPL-3"
+homepage="http://cvc4.cs.nyu.edu/web/"
+distfiles="http://cvc4.cs.nyu.edu/builds/src/cvc4-1.4.tar.gz"
+checksum=76fe4ff9eb9ad7d65589efb47d41aae95f3191bd0d0c3940698a7cb2df3f7024
+
+post_extract()
+{
+	cd ${wrksrc}/contrib
+	./get-antlr-3.4
+}
+
+do_configure()
+{
+	./configure ${configure_args} --with-antlr-dir=`pwd`/antlr-3.4 ANTLR=`pwd`/antlr-3.4/bin/antlr3
+}

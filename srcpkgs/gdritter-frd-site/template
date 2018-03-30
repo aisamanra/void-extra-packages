@@ -1,0 +1,26 @@
+# Template file for 'gdritter-frd-site'
+pkgname=gdritter-frd-site
+version=
+revision=1
+#wrksrc=
+#create_wrksrc=yes
+#only_for_archs="i686 x86_64"
+build_style=haskell-stack
+#configure_args=""
+#make_build_args=""
+#make_install_args=""
+#conf_files=""
+#make_dirs="/var/log/dir 0755 root root"
+hostmakedepends=""
+makedepends=""
+depends=""
+short_desc=""
+maintainer="Getty Ritter <gdritter-frd-site-pkg@infinitenegativeutility.com>"
+license="GPL-3"
+homepage=""
+distfiles=""
+checksum=""
+
+function do_fetch {
+	git clone 
+}

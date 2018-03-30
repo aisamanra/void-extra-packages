@@ -1,0 +1,24 @@
+# Template file for 'glirc'
+pkgname=glirc
+version=2.11
+revision=1
+nocross=yes
+hostmakedepends="ghc cabal-install stack"
+makedepends="zlib-devel ncurses-devel ncurses-libs ncurses-term ncurses"
+wrksrc="irc-core-${version}"
+short_desc="Console IRC client"
+maintainer="Getty Ritter <glirc-pkg@infinitenegativeutility.com>"
+license="BSD"
+homepage="https://github.com/glguy/irc-core"
+distfiles="https://github.com/glguy/irc-core/archive/v${version}.tar.gz"
+checksum=99dac80875c8be52241cac7a613299ce6082595c3ccef13937fe32214d00485a
+nopie="yes"
+
+do_build() {
+	stack init --resolver=ghc-8 --install-ghc
+	stack build
+}
+
+do_install() {
+	exit 99
+}

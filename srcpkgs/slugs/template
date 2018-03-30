@@ -1,0 +1,23 @@
+# Template file for 'slugs'
+pkgname=slugs
+version=0.9
+revision=1
+hostmakedepends=""
+makedepends="boost-devel"
+depends=""
+short_desc="Small but complete GROne synthesizer"
+maintainer="Getty Ritter <slugs-pkg@infinitenegativeutility.com>"
+license="GPL-3"
+homepage="https://github.com/VerifiableRobotics/slugs"
+distfiles="https://github.com/VerifiableRobotics/${pkgname}/archive/v${version}.tar.gz"
+checksum=428d03246367c9651972200eb43600ddfe81060f45fdc51be258befe9190dddb
+nopie=yes
+
+do_build() {
+    cd src
+    make ${make_install_args}
+}
+
+do_install() {
+    vbin src/slugs
+}

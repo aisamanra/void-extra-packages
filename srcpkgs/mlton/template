@@ -1,0 +1,31 @@
+# Template file for 'mlton'
+pkgname=mlton
+version=20180207
+revision=1
+only_for_archs="i686 x86_64"
+make_build_target="smlnj-mlton"
+hostmakedepends="sml-nj"
+makedepends="gmp-devel"
+depends=""
+short_desc="An open-source, whole-program, optimizing Standard ML compiler."
+maintainer="Getty Ritter <mlton-pkg@infinitenegativeutility.com>"
+license="argl"
+homepage="http://mlton.org/"
+distfiles="https://github.com/MLton/${pkgname}/archive/on-${version}-release.tar.gz"
+checksum=f107212bd332903754edee2301f570a28e1c8610a01ee4eab02443d43ba42ed0
+
+function post_extract {
+	mv ${XBPS_BUILDDIR}/mlton-on-${version}-release ${wrksrc}
+}
+
+function do_build {
+	for file in $(find . -name Makefile); do
+		sed -i 's/LEX := .*/LEX := ml-lex/g' ${file}
+		sed -i 's/YACC := .*/YACC := ml-yacc/g' ${file}
+	done
+	make ${makejobs} ${make_build_args} smlnj-mlton
+}
+
+function do_install {
+	return 99
+}

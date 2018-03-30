@@ -1,0 +1,14 @@
+# Template file for 'creduce'
+pkgname=creduce
+version=2.5.0
+revision=1
+build_style=gnu-configure
+hostmakedepends="flex llvm perl clang"
+makedepends="zlib-devel ncurses-devel libllvm3.8"
+depends=""
+short_desc="Automatic reducer for C test cases"
+maintainer="Getty Ritter <creduce-pkg@infinitenegativeutility.com>"
+license="GPL-3"
+homepage="https://embed.cs.utah.edu/creduce/"
+distfiles="https://embed.cs.utah.edu/creduce/creduce-${version}.tar.gz"
+checksum=2dcd784e1d27df60f4ea1d92c4c556c02da4152db353d544dce8b7813fa443e4

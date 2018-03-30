@@ -1,0 +1,32 @@
+# Template file for 'gr1c'
+pkgname=gr1c
+version=0.11.0
+revision=1
+build_style=gnu-makefile
+hostmakedepends="make gcc curl tar bison flex"
+makedepends=""
+depends=""
+short_desc="a collection of tools for GR(1) synthesis and related activities"
+maintainer="Getty Ritter <gr1c-pkg@infinitenegativeutility.com>"
+license="BSD"
+homepage="https://github.com/tulip-control/gr1c"
+distfiles="https://github.com/tulip-control/gr1c/archive/v0.11.0.tar.gz"
+checksum=2ca464600fec4801c06c6ffc11baa7a5f7d5529920b69e5c4036458f4b39d79b
+nopie=yes
+
+pre_build() {
+    ./get-deps.sh
+}
+
+do_build() {
+    ./build-deps.sh
+    make ${makejobs} gr1c
+    make ${makejobs} all
+}
+
+pre_install() {
+    mkdir -p ${DESTDIR}/usr/bin
+}
+do_install() {
+    make prefix="/usr" DESTDIR=${DESTDIR} install
+}

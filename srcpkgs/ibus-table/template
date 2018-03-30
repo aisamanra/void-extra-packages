@@ -1,0 +1,18 @@
+# Template file for 'ibus-table'
+pkgname=ibus-table
+version=1.9.12
+revision=3
+build_style=gnu-makefile
+hostmakedepends="python3 automake pkg-config"
+makedepends="gettext-devel ibus-devel"
+depends="ibus python3.4-gobject"
+short_desc="IM Engine framework for table-based input methods"
+maintainer="Getty Ritter <ibus-table-pkg@infinitenegativeutility.com>"
+license="LGPL"
+homepage="https://github.com/kaio/ibus-table"
+distfiles="https://github.com/kaio/${pkgname}/releases/download/${version}/${pkgname}-${version}.tar.gz"
+checksum=7879dc305bde4cd0aab20ce1437a59d32b1e00de5e4e66930a5a8ba43e5550cd
+
+do_configure() {
+    PYTHON=/usr/bin/python3.4 ./autogen.sh --prefix=/usr --libexecdir=/usr/libexec
+}

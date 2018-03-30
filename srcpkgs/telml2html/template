@@ -1,0 +1,33 @@
+# Template file for 'electric-boogaloo'
+pkgname=telml2html
+version="$(date +%F | sed 's/-//g')"
+revision=1
+hostmakedepends="ghc cabal-install git"
+makedepends=""
+depends=""
+short_desc="Conversion program for TeLML"
+maintainer="Getty Ritter <telml2html-pkg@infinitenegativeutility.com>"
+license="BSD"
+homepage="https://github.com/aisamanra/telml"
+distfiles=""
+checksum=""
+nopie="yes"
+
+do_fetch() {
+    git clone https://git.gdritter.com/telml ${wrksrc}
+}
+
+do_build() {
+    cd telml-markup
+	cabal sandbox init
+	cabal update
+	cabal sandbox add-source ../telml/
+	cabal install ${makejobs} --only-dependencies
+	cabal configure -v --prefix=/usr
+	cabal build ${makejobs}
+}
+
+do_install() {
+	vbin telml-markup/dist/build/telml2html/telml2html
+	vlicense telml-markup/LICENSE
+}

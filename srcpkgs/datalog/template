@@ -1,0 +1,14 @@
+# Template file for 'datalog'
+pkgname=datalog
+version=2.6
+revision=1
+build_style=gnu-configure
+hostmakedepends=""
+makedepends=""
+depends=""
+short_desc="A lightweight deductive database system"
+maintainer="Getty Ritter <datalog-pkg@infinitenegativeutility.com>"
+license="GPL-3"
+homepage="http://www.ccs.neu.edu/home/ramsdell/tools/datalog/"
+distfiles="$SOURCEFORGE_SITE/${pkgname}/${pkgname}-${version}.tar.gz"
+checksum=062da47ea2d8b101e4984f417ea6cee768bdf999e523182d53237c2a856bbd4c

@@ -1,0 +1,18 @@
+# Template file for 'asn1c'
+pkgname=asn1c
+version=0.9.27
+revision=1
+build_style=gnu-configure
+hostmakedepends="autoconf"
+makedepends=""
+depends=""
+short_desc="ASN.1 compiler"
+maintainer="Getty Ritter <asn1c-pkg@infinitenegativeutility.com>"
+license="GPL-3"
+homepage="http://lionet.info/asn1c/"
+distfiles="https://github.com/vlm/asn1c/releases/download/v0.9.27/asn1c-0.9.27.tar.gz"
+checksum=025f64e1c27211b36e181350b52fde34ad23f4330fff96b2563ed3fda7b0db9e
+
+pre_configure() {
+    test -f configure || autoreconf -iv
+}

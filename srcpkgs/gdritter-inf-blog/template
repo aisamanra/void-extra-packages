@@ -1,0 +1,38 @@
+# Template file for 'gdritter-inf-blog'
+pkgname=gdritter-inf-blog
+version=0.2
+revision=2
+nocross=yes
+wrksrc="inf-blog-${version}"
+hostmakedepends="cabal-install"
+makedepends="ghc zlib-devel"
+short_desc="Deployment package for blog.infinitenegativeutility.com"
+maintainer="Getty Ritter <gdritter-inf-blog-pkg@infinitenegativeutility.com>"
+license="Proprietary"
+homepage="http://blog.infinitenegativeutility.com/"
+distfiles="http://gdritter.com/inf-blog-${version}.tar.gz"
+checksum="dafec84b9e92c9a2f9f0de7bb3ee01407bb087de157f708d59e065ada8ce7781"
+nopie=yes  # network-2.6.2.1 build fails with a relocation
+system_accounts="http"
+
+do_build() {
+	cabal sandbox init
+	cabal update
+	cabal install ${makejobs} --only-dependencies
+	cabal configure -v --prefix=/usr
+	cabal build ${makejobs}
+}
+
+do_install() {
+	vbin dist/build/inf-blog/ing-blog
+	vlicense LICENSE
+
+	mkdir -p ${DESTDIR}/opt/inf/blog/{static,log,snaplets/{sqlite-auth,sqlite-simple}}
+	cp ${wrksrc}/static/main.css ${DESTDIR}/opt/inf/blog/static/.
+	# cp ${wrksrc}/snaplets/sqlite-auth/devel.cfg ${DESTDIR}/opt/inf/blog/snaplets/sqlite-auth/.
+	# cp ${wrksrc}/snaplets/sqlite-simple/devel.cfg ${DESTDIR}/opt/inf/blog/snaplets/sqlite-simple/.
+	cp ${wrksrc}/schema.sql ${DESTDIR}/opt/inf/blog/.
+
+	mkdir -p ${DESTDIR}/etc/sv/gdr-inf-blog
+	cp ${FILESDIR}/run ${DESTDIR}/etc/sv/gdr-inf-blog
+}

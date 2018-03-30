@@ -1,0 +1,8 @@
+# INSTALL
+case "$ACTION" in
+pre)
+	;;
+post)
+	chown -R mattermost:mattermost /opt/mattermost
+	;;
+esac
