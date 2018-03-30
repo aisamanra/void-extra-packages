@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export SMLNJ_HOME=${SMLNJ_HOME:-/usr/lib/smlnj}
+
+exec $SMLNJ_HOME/bin/ml-lex $@

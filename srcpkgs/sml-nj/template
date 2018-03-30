@@ -1,0 +1,34 @@
+# Template file for 'sml-nj'
+pkgname=sml-nj
+version=110.82
+revision=1
+create_wrksrc=yes
+only_for_archs="i686 x86_64"
+hostmakedepends="wget"
+makedepends="gcc-multilib"
+depends="glibc-32bit libgcc-32bit"
+short_desc="Standard ML of New Jersey, an open-source SML compiler"
+maintainer="Getty Ritter <sml-nj-pkg@infinitenegativeutility.com>"
+license="BSD alike"
+homepage="http://www.smlnj.org/"
+distfiles="http://smlnj.cs.uchicago.edu/dist/working/${version}/config.tgz"
+checksum=ceff9288e8106d94ce813181d6f4c4da02e4abf808875b27b78d9f6258d016de
+nopie=yes
+
+function do_build {
+	config/install.sh
+}
+
+function do_install {
+	vmkdir /usr/lib/smlnj
+	cp -R ${wrksrc}/{bin,lib} ${DESTDIR}/usr/lib/smlnj
+
+	for file in heap2exec ml-antlr ml-build ml-burg ml-lex ml-makedepend \
+						  ml-nlffigen ml-ulex ml-yacc sml; do
+		vbin ${FILESDIR}/${file}
+	done
+
+	for f in ${wrksrc}/doc/man/man*/*; do
+		vman $f
+	done
+}
