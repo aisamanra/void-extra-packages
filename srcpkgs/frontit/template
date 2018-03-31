@@ -2,6 +2,7 @@
 pkgname=frontit
 version=0.0.1
 revision=2
+build_style=haskell-cabal
 hostmakedepends="ghc cabal-install git"
 makedepends="zlib-devel"
 depends=""
@@ -12,17 +13,3 @@ homepage="https://github.com/aisamanra/frontit"
 distfiles="https://github.com/aisamanra/${pkgname}/archive/v${version}.tar.gz"
 checksum="23b8d9bf715420d2a0dfa8f00b7e315ed5dec81f3f0c7969d714e20a3017d891"
 nopie="yes"
-
-do_build() {
-	cabal sandbox init
-	cabal update
-	cabal install ${makejobs} --only-dependencies  --prefix=/usr
-	cabal configure -v --prefix=/usr
-	cabal build ${makejobs}
-}
-
-do_install() {
-	vbin dist/build/${pkgname}/${pkgname}
-	vlicense LICENSE
-  cp -r /usr/share/x86_64-linux-ghc-8.0.1 ${DESTDIR}/usr/share/.
-}

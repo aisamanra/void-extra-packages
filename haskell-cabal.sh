@@ -4,7 +4,8 @@ do_build() {
 	cabal sandbox init
 	cabal update
 	cabal install ${makejobs} --only-dependencies
-	cabal configure -v --prefix=/usr
+	cabal configure -v --prefix=/usr --libsubdir='$pkg' \
+		--datasubdir='$pkg' --docdir='$datadir/doc/$pkg'
 	cabal build ${makejobs}
 }
 

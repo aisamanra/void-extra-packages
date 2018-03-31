@@ -2,9 +2,9 @@
 pkgname=xmobar
 version=0.24.5
 revision=2
+build_style=haskell-cabal
 hostmakedepends="pkg-config ghc cabal-install git"
 makedepends="libX11-devel libXrandr-devel libXft-devel zlib-devel"
-depends=""
 short_desc="A minimalistic status bar"
 maintainer="Getty Ritter <xmobar-pkg@infinitenegativeutility.com>"
 license="BSD-3"
@@ -13,16 +13,3 @@ distfiles="https://github.com/jaor/xmobar/archive/${version}.tar.gz"
 checksum=3c406361971703345c291c7732e3969f38dcfd265ca53134b0bffe20e74c1ba1
 nocross="yes"
 nopie="yes"
-
-do_build() {
-	# cabal sandbox init
-	  cabal update
-    cabal new-build ${makejobs} --prefix=/usr --flags=with_xft
-	# cabal install ${makejobs} --only-dependencies
-	# cabal configure -v --prefix=/usr --flags=with_xft
-	# cabal build ${makejobs}
-}
-
-do_install() {
-	vbin $(find dist-newstyle -name xmobar -type f)
-}

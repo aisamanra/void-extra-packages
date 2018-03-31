@@ -29,7 +29,14 @@ for thing in ./srcpkgs/*; do
         if ( cd "$ROOT" && git ls-files --error-unmatch "template" >/dev/null 2>&1 ); then
             info "$PKG already exists in void-packages repo!"
         elif ! diff "srcpkgs/$PKG/template" "$ROOT/template" >/dev/null; then
-            info "Package $PKG has modifications in void-packages"
+            if [ -z "${OVERWRITE}" ]; then
+                info "Package $PKG has modifications in void-packages"
+            else
+                info "Overwriting $PKG with new modifications!"
+                rm -rf "$ROOT"
+                mkdir -p "$ROOT"
+                cp "srcpkgs/$PKG/template" "$ROOT/template"
+            fi
         fi
     else
         mkdir -p "$ROOT"

@@ -3,8 +3,7 @@ pkgname=electric-boogaloo
 version=0.2.0
 revision=1
 hostmakedepends="ghc cabal-install git"
-makedepends=""
-depends=""
+build_style=haskell-cabal
 short_desc="Opinionated sugar for SQLite table definitions"
 maintainer="Getty Ritter <electric-boogaloo-pkg@infinitenegativeutility.com>"
 license="BSD"
@@ -12,16 +11,3 @@ homepage="https://github.com/aisamanra/electric-boogaloo"
 distfiles="https://github.com/aisamanra/${pkgname}/archive/v${version}.tar.gz"
 checksum=8d38a73ddccc2514c992c861c6eeff4746552ba40891795e639d92e64fa7c7d7
 nopie="yes"
-
-do_build() {
-	cabal sandbox init
-	cabal update
-	cabal install ${makejobs} --only-dependencies
-	cabal configure -v --prefix=/usr
-	cabal build ${makejobs}
-}
-
-do_install() {
-	vbin dist/build/electric-boogaloo/electric-boogaloo
-	vlicense LICENSE
-}
